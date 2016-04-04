@@ -96,10 +96,14 @@ int main()
   char *encrypted;
   encrypted=(char*)malloc(length*sizeof(char));
   encrypted=hide_pass(data,key,data_length,key_length,locations);
+  ofstream outputFile("encripted.txt");
   for(int i=0;i<length;i++)
   {
     cout<<encrypted[i];
+    outputFile << encrypted[i];
   }
+  cout<<'\n';
+  outputFile << '\n';
   return 0;
 }
 
