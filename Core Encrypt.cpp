@@ -18,12 +18,22 @@ int* random_gen(int data_length)
 	 return ra;
 }
 
-string encryption(string name, int index, int data_length, int* random)    //Function that encrypts
+string encryption(string name, int index, int data_length, int* random, int flag)    //Function that encrypts
 {
-    for(int i=index;i<(index+data_length);i++)
+  if(flag%2==0)
+  {
+	  for(int i=index;i<(index+data_length);i++)
     {
-        name[i-index]=name[i-index]+random[i];
+      name[i-index]=name[i-index]+random[i];
     }  
+	}
+	if(flag%2==1)
+	{
+	  for(int i=index;i<(index+data_length);i++)
+    {
+        name[i-index]=name[i-index]-random[i];
+    }
+	}
   return(name);
 }
 
@@ -87,7 +97,7 @@ int main()
   random=random_gen(data_length);
   for(int i=0; i<key_length;i++)
   {
-    data = encryption(data,(int) key[i],data_length,random);
+    data = encryption(data,(int) key[i],data_length,random,i);
   }
   int length=(data_length+(2*key_length));
   int *locations;
