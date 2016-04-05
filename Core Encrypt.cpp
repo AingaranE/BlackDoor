@@ -11,11 +11,11 @@ int* random_gen(int data_length)
 {
   int *ra; 
   ra=(int*)malloc((127+data_length)*sizeof(int));
-	 for (int i=0;i<(127+data_length);i++) 
-	 {
-		 ra[i]=(-31+(rand()%116));
-	 }
-	 return ra;
+	for (int i=0;i<(127+data_length);i++) 
+	{
+		ra[i]=(-31+(rand()%116));
+	}
+	return ra;
 }
 
 string encryption(string name, int index, int data_length, int* random, int flag)    //Function that encrypts
@@ -31,7 +31,7 @@ string encryption(string name, int index, int data_length, int* random, int flag
 	{
 	  for(int i=index;i<(index+data_length);i++)
     {
-        name[i-index]=name[i-index]-random[i];
+      name[i-index]=name[i-index]-random[i];
     }
 	}
   return(name);
@@ -83,6 +83,53 @@ char* hide_pass(string data, string key, int data_length, int key_length, int* l
   return encrypted;
 }
 
+
+char* decription(char* encrypted, int length, int* random)
+{
+  int j=0;
+  char *pass;
+  for(int i=0;i<length;i++)
+  {
+    if(encrypted[i]==(char)244)
+    {
+      pass[j]=encrypted[i+1];
+      j=j+1;
+      encrypted[i]='';
+      encrypted[i+1]='';
+    }
+  }
+  int key_length=(j+1);
+  j=0;
+  char *encrypt;
+  for(int i=0;i<length;i++)
+  {
+    if(!encrypted[i])
+    {
+      encrypt[j]=encrypted[i];
+    }
+  }
+  int data_length=(j+1);
+  for(int i=(key_length-1);i>=0;i++)
+  {
+    index=(int) pass[i];
+    if(i%2==0)
+    {
+	    for(int i=index;i<(index+data_length);i++)
+      {
+        encrypt[i-index]=encrypt[i-index]-random[i];
+      }  
+	  }
+	if(i%2==1)
+	{
+	  for(int i=index;i<(index+data_length);i++)
+    {
+      encrypt[i-index]=encrypt[i-index]+random[i];
+    }
+	}
+  }
+  return encrypt;
+}
+
 int main()
 {
   string data,key;
@@ -114,6 +161,15 @@ int main()
   }
   cout<<'\n';
   outputFile << '\n';
+  
+  //decryption
+  char *decripted;
+  decripted=decription(encrypted,length,random);
+  for(int i=0;i<data_length;i++)
+  {
+    cout<<decripted[i];
+  }
+  cout<<'\n';
   return 0;
 }
 
