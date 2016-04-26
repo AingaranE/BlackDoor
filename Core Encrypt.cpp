@@ -1,9 +1,9 @@
-#include <iostream>
-#include <cstring>
+#include <iostream.h>
+#include <string.h>
 #include <math.h>
-#include <vector>
-#include <fstream>
-#include <cstdlib>
+#include <vector.h>
+#include <fstream.h>
+#include <stdlib.h>
 
 using namespace std;
 
