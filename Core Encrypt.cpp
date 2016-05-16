@@ -89,8 +89,8 @@ int main()
   int *random=NULL;
   data="HELLO, Niranjan!";
   key="8903716100";
-  //getline (cin, data);  //get the data to be encripted
-  //getline (cin, key);   //get the passkey for encription
+  //getline (cin, data);  //get the data to be encrypted
+  //getline (cin, key);   //get the passkey for encryption
   int data_length=0,key_length=0;
   data_length=data.length();
   key_length=key.length();
@@ -106,7 +106,7 @@ int main()
   char *encrypted;
   encrypted=(char*)malloc(length*sizeof(char));
   encrypted=hide_pass(data,key,data_length,key_length,locations);
-  ofstream outputFile("encripted.txt");
+  ofstream outputFile("encryption.txt");
   for(int i=0;i<length;i++)
   {
     cout<<encrypted[i];
